@@ -22,7 +22,7 @@ require('lazy').setup({
 
   -- modular approach: using `require 'path/name'` will
   -- include a plugin definition from file lua/path/name.lua
-
+  require 'kickstart.plugins.navbuddy',
   require 'kickstart/plugins/gitsigns',
 
   require 'kickstart/plugins/which-key',
@@ -54,7 +54,7 @@ require('lazy').setup({
   --
   -- require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.indent_line',
-  -- require 'kickstart.plugins.lint',
+  require 'kickstart.plugins.here',
   -- require 'kickstart.plugins.autopairs',
   -- require 'kickstart.plugins.neo-tree',
 
