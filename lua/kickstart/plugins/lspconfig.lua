@@ -268,6 +268,19 @@ return {
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for ts_ls)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+            
+            -- Add navbuddy attachment for clangd
+            if server_name == 'clangd' then
+              local navbuddy = require("nvim-navbuddy")
+              local original_on_attach = server.on_attach
+              server.on_attach = function(client, bufnr)
+                if original_on_attach then
+                  original_on_attach(client, bufnr)
+                end
+                navbuddy.attach(client, bufnr)
+              end
+            end
+            
             require('lspconfig')[server_name].setup(server)
           end,
         },

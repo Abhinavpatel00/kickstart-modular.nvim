@@ -3,6 +3,9 @@
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
+    -- Set up keymap to open navbuddy
+vim.keymap.set("n", "<leader>nv", "<cmd>Navbuddy<cr>", { desc = "Open Navbuddy" })
+ 
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
