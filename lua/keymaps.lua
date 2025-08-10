@@ -3,6 +3,15 @@
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
+
+-- Move current line or selected lines down with Shift+K
+vim.keymap.set("n", "K", ":m .-2<CR>==", { noremap = true, silent = true })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
+
+-- Move current line or selected lines up with Shift+J
+vim.keymap.set("n", "J", ":m .+1<CR>==", { noremap = true, silent = true })
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
+
     -- Set up keymap to open navbuddy
 vim.keymap.set("n", "<leader>nv", "<cmd>Navbuddy<cr>", { desc = "Open Navbuddy" })
  
