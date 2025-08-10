@@ -7,6 +7,15 @@ return {
         'SmiteshP/nvim-navic',
         'MunifTanjim/nui.nvim',
       },
+      keys = {
+        {
+          '<leader>nv',
+          function()
+            require('nvim-navbuddy').open()
+          end,
+          desc = 'Open Navbuddy',
+        },
+      },
       opts = { lsp = { auto_attach = true } },
       config = function()
         local navbuddy = require("nvim-navbuddy")
@@ -100,20 +109,42 @@ return {
             }),
             ["g?"] = actions.help(),
           },
-          lsp = {
-            auto_attach = false,
+         lsp = {
+            auto_attach = true,
             preference = nil,
           },
           source_buffer = {
             follow_node = true,
             highlight = true,
             reorient = "smart",
-            scrolloff = nil
+            scrolloff = nil,
           },
           custom_hl_group = nil,
         }
       end,
     },
   },
-  -- your lsp config or other stuff
+
+  config = function()
+    --  LSP serverconfig for navbuddy to work
+    local lspconfig = require 'lspconfig'
+
+    lspconfig.lua_ls.setup {
+      settings = {
+        Lua = {
+          diagnostics = {
+            globals = { 'vim' },
+          },
+          workspace = {
+            library = vim.api.nvim_get_runtime_file('', true),
+            checkThirdParty = false,
+          },
+        },
+      },
+    }
+
+    lspconfig.pyright.setup {}
+    lspconfig.ts_ls.setup {}
+    lspconfig.clangd.setup {}
+  end,
 }
